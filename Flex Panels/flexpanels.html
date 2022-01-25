@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Flex Panels with NBA Legends</title>
+        <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body
+        <div class="panels">
+            <div class="panel panel1">
+                <p><span class="name_span">His</span></p>
+                <p><span class="surname_span">Jordan</span></p>
+                <p><span class="name_span">Airness</span></p>
+            </div>
+
+            <div class="panel panel2">
+                <p><span class="name_span">King</span></p>
+                <p><span class="surname_span">LeBron</span></p>
+                <p><span class="name_span">James</span></p>
+            </div>
+
+            <div class="panel panel3">
+                <p><span class="name_span">Black</span></p>
+                <p><span class="surname_span">Kobe</span></p>
+                <p><span class="name_span">Mamba</span></p>
+            </div>
+
+        </div>
+
+        <script>
+
+            // get all individal panels
+            const panels = document.querySelectorAll('.panel');
+
+            // function to toggle class to open on a panel
+            function panelOpen() {
+                // ensure no panels have class of open
+                //panels.forEach(panel => panel.classList.remove('open'));
+
+                // add class of open
+                this.classList.toggle('open');
+            }
+            // function to toggle class to open-active on a panel
+            function panelActive(e) {
+                // remove class from all panels
+                // panels.forEach(panel => panel.classList.remove('open-active'));
+                if (e.propertyName.includes('flex')) {
+                    // add class of active-open
+                    this.classList.toggle('open-active');
+                }
+            }
+
+            // call panel open function on click of each panel
+            panels.forEach(panel => panel.addEventListener('click', panelOpen));
+            // call panel open-active function on transition end of each panel
+            panels.forEach(panel => panel.addEventListener('transitionend', panelActive));
+
+
+        </script>
+    </body>
+</html>

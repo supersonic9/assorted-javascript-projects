@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(60, 55, 96);
+    color: white;
+    font-family: 'helvetica neue', sans-serif;
+    font-size: 32px;
+    font-weight: 100;
+    text-align: center;
+}
+
+:root {
+    --base: #ffc600;
+    --spacing: 10px;
+    --blur: 0px;
+}
+
+.pictures {
+    border: 1px solid white;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.heading_span {
+    color: var(--base);
+}
+
+
+h6 {
+    font-style: italic;
+}
+
+img {
+    max-height: 200px;
+    max-width: 300px;
+    margin: 10px;
+}
+
+
+.single_picture {
+    border: 1px solid white;
+    margin: auto;
+    padding: 10px;
+    background: var(--base);
+    filter: blur(var(--blur));
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>NBA Player Search</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+
+        <form class="search-form" action="index.html" method="post">
+            <input type="text" class="search" placeholder="NBA player" autofocus>
+            <ul class="suggestions">
+                <li>Search for an NBA player</li>
+                <li>By first or last name</li>
+            </ul>
+        </form>
+
+    <script>
+const rawPlayerData = 'https://raw.githubusercontent.com/bttmly/nba/master/data/players.json'
+const rawTeamsData = 'https://raw.githubusercontent.com/bttmly/nba/master/data/teams.json'
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+const players = [];
+fetch(rawPlayerData)
+  .then(blob => blob.json())
+  .then(data => players.push(...data));
+
+const teams = [];
+fetch(rawTeamsData)
+  .then(blob => blob.json())
+  .then(data => teams.push(...data));
+
+function findMatches(playerToMatch, players) {
+  return players.filter(player => {
+    const regex = new RegExp(playerToMatch, 'gi');
+    return player.firstName.match(regex) || player.lastName.match(regex);
+  });
+}
+
+function findTeam(playersTeamId, teams) {
+  return teams.filter(team => team.teamId == playersTeamId);
+}
+
+function displayMatches() {
+  const matchArray = findMatches(this.value, players);
+
+  const html = matchArray.map(player => {
+    const regex = new RegExp(this.value, 'gi');
+    const firstName = player.firstName.replace(regex, `<span class="hl">${this.value}</span>`);
+    const lastName = player.lastName.replace(regex, `<span class="hl">${this.value}</span>`);
+    const team = findTeam(player.teamId, teams);
+    if (team.length < 1) {
+      teamName = 'No team :( lol';
+    } else {
+      teamName = team[0].teamName;
+    }
+    return `
+    <li>
+      <span>${firstName}, ${lastName}</span>
+      <span class="team">${teamName}</span>
+    </li>
+    `
+  }).join('');
+  suggestions.innerHTML = html;
+}
+
+searchInput.addEventListener('change', displayMatches);
+searchInput.addEventListener('keyup', displayMatches);
+
+/*
+        const players = [];
+        fetch(rawPlayerData)
+            .then(blob => blob.json())
+            .then(data => players.push(...data));
+
+        const teams = [];
+        fetch(rawTeamsData)
+            .then(blob => blob.json())
+            .then(data => teams.push(...data));
+
+        function findMatches(wordToMatch, players) {
+            return players.filter(player => {
+                const regex = new RegExp(wordToMatch, 'gi');
+                return player.firstName.match(regex) || player.lastName.match(regex);
+            })
+        }
+
+        function getTeam(playersTeamId, teams) {
+            return teams.filter(team => team.teamId == playersTeamId);
+        }
+
+        function displayMatches() {
+            const matchArray = findMatches(this.value, players);
+            const html = matchArray.map(player => {
+                const regex = new RegExp(this.value, 'gi');
+                const firstName = player.firstName.replace(regex, `<span class="hl">${this.value}</span>`);
+                const lastName = player.lastName.replace(regex, `<span class="hl">${this.value}</span>`);
+                const team = getTeam(player.teamId, teams);
+                if (team.length < 1) {
+                    teamName = 'No team';
+                } else {
+                    teamName = team[0].teamName;
+                }
+                return `
+                <li>
+                    <span class="name">${firstName} ${lastName}</span>
+                    <span class="team">${teamName}<span>
+                </li>
+                `
+            }).join('');
+            suggestions.innerHTML = html;
+        }
+
+        searchInput = document.querySelector('.search');
+        suggestions = document.querySelector('.suggestions');
+
+        searchInput.addEventListener('change', displayMatches);
+        searchInput.addEventListener('keyup', displayMatches);
+*/
+    </script>
+
+    </body>
+</html>

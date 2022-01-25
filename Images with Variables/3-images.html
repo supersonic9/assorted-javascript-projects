@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Blur and colour changing with JS</title>
+        <link rel="stylesheet" href="./styles.css">
+    </head>
+    <body>
+        <h1>Rorschach Images with <span class="heading_span">CSS and Javascript</span></h1>
+
+        <h6>Adjust the color and blur of each image below</h6>
+
+        <div class="pictures">
+
+            <div class="single_picture image1">
+                <label for="blur">Blur:</label>
+                <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+                <br>
+                <label for="base">Background:</label>
+                <input id="base" type="color" name="base" value="#6055CD">
+                <br>
+                <img class="image1_img" src="./image1.jpg" alt="">
+            </div>
+
+            <div class="single_picture image2">
+                <label for="blur">Blur:</label>
+                <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+                <br>
+                <label for="base">Background:</label>
+                <input id="base" type="color" name="base" value="#6055CD">
+                <br>
+                <img class="image2_img" src="./image2.jpg" alt="">
+            </div>
+
+            <div class="single_picture image3">
+                <label for="blur">Blur:</label>
+                <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+                <br>
+                <label for="base">Background:</label>
+                <input id="base" type="color" name="base" value="#6055CD">
+                <br>
+                <img class="image3_img" src="./image3.jpg" alt="">
+            </div>
+
+        </div>
+
+        <!-- this is kinda cool but doesn't actually use variables in JS which is the whole point -->
+        <!-- My take two does -->
+        <script>
+
+            // get all inputs for image 1
+            const inputs1 = document.querySelectorAll('.image1 input')
+
+            // function to update style
+            function styleUpdate1() {
+
+                // get styling suffix to work with
+                const suffix = this.dataset.sizing || '';
+
+                if (suffix === 'px') {
+                    // update fliter / blur styling
+                    document.querySelector('.image1_img').style.filter = `blur(${this.value}px)`;
+                } else {
+                    document.querySelector('.image1').style.backgroundColor = this.value;
+                }
+            }
+            // apply function to each input for change
+            inputs1.forEach(input => input.addEventListener('change', styleUpdate1));
+
+            // get all inputs for image 2
+            const inputs2 = document.querySelectorAll('.image2 input')
+
+            // function to update style
+            function styleUpdate2() {
+
+                // get styling suffix to work with
+                const suffix = this.dataset.sizing || '';
+
+                if (suffix === 'px') {
+                    // update fliter / blur styling
+                    document.querySelector('.image2_img').style.filter = `blur(${this.value}px)`;
+                } else {
+                    document.querySelector('.image2').style.backgroundColor = this.value;
+                }
+            }
+            // apply function to each input for change
+            inputs2.forEach(input => input.addEventListener('change', styleUpdate2));
+
+            // get all inputs for image 3
+            const inputs3 = document.querySelectorAll('.image3 input')
+
+            // function to update style
+            function styleUpdate3() {
+
+                // get styling suffix to work with
+                const suffix = this.dataset.sizing || '';
+
+                if (suffix === 'px') {
+                    // update fliter / blur styling
+                    document.querySelector('.image3_img').style.filter = `blur(${this.value}px)`;
+                } else {
+                    document.querySelector('.image3').style.backgroundColor = this.value;
+                }
+            }
+            // apply function to each input for change
+            inputs3.forEach(input => input.addEventListener('change', styleUpdate3));
+
+        </script>
+
+    </body>
+</html>
