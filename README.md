@@ -1,6 +1,6 @@
-## Javascript Portfolio
+# Javascript Portfolio
 
-# Collection of projects to demonstrate proficiency with vanilla JS
+## Collection of projects to demonstrate proficiency with vanilla JS
 
 - Clock - a Clock face which ticks and updates every second
 - Flex Panels - 3 panels which grow and shrink depending on which is selected
